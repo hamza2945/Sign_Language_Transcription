@@ -1,0 +1,189 @@
+{% extends 'app.html' %}
+
+{% block content %}
+<style>
+  body {
+    font-family:"Playwrite NG Modern";
+    background-color: hsla(218, 23%, 34%, 0.334); /* Light gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .container {
+    max-width: 400px;
+    width: 50%;
+    text-overflow: ellipsis;
+    text-align: center;
+    padding: 20px 10px 40px 10px;
+    margin-right: 20%;
+    background-color: rgba(221, 225, 224, 0.549);
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition properties for hover effect */
+  }
+  .container:hover {
+    transform: scale(1.05); /* Scale up the container on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add a shadow effect on hover */
+  }
+
+  h2 {
+    color: #08130e; /* Dark heading color */
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-weight: bold;
+    color: #343a40; /* Dark label color */
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da; /* Light border color */
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: #343a40; /* Dark button color */
+    color: #fff; /* White text color */
+    border: none;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d; /* Gray button color */
+    color: #fff; /* White text color */
+    border: none;
+  }
+  .hover-text {
+
+    position: absolute;
+    top: 40%;
+    left: calc(20% - 70px);
+    transform: translateY(-50%);
+    font-family:"Playwrite NG Modern";
+    font-size: 200%;
+    font-weight: 120%;
+    color: rgb(212, 222, 214);
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 37%;
+    height: 15%;
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .hover-text:hover {
+    transform: scale(1.1);
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    background-color: #212529; /* Darker color on hover */
+  }
+
+  .text-danger {
+    color: #dc3545; /* Red text color for error messages */
+    text-align: left;
+    margin-top: 5px;
+  }
+</style>
+
+<div class="main-container">
+  <div class="image">
+    <img src="{{ url_for('static', filename='logo.jpg') }}" alt="JPG Image">
+
+  </div>
+  <div class="hover-text">Welcome To Our Sign-Language App<br> <br> New Here Register Yourself</div>
+  <div class="container">
+    <h2>Register Form</h2>
+
+    <form action="/register" method="POST">
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+        {% if form.name.errors %}
+          <ul class="text-danger">
+            {% for error in form.name.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+        {% if form.email.errors %}
+          <ul class="text-danger">
+            {% for error in form.email.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+        {% if form.password.errors %}
+          <ul class="text-danger">
+            {% for error in form.password.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Register</button>
+      <br><br>
+      <a href="/login" class="btn btn-secondary">Login</a>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

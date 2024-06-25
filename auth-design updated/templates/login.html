@@ -1,0 +1,170 @@
+{% extends 'app.html' %}
+
+{% block content %}
+<style>
+  body {
+    margin: 0;
+    font-family:"Playwrite NG Modern";;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: hsla(218, 23%, 34%, 0.334);
+  }
+
+  .main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image {
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .container {
+    max-width: 400px;
+    width: 50%;
+    padding: 20px 10px 40px 10px;
+    margin-right: 20%;
+    background-color: rgba(221, 225, 224, 0.549);
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition properties for hover effect */
+  }
+
+  .container:hover {
+    transform: scale(1.05); /* Scale up the container on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add a shadow effect on hover */
+  }
+
+  h2 {
+    text-align: center;
+    color: #08130e;
+    margin-bottom: 20px;
+  }
+
+  label {
+    color: #343a40;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+  }
+
+  .btn-primary {
+    background-color: #343a40;
+    color: #fff;
+    border: none;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+  }
+
+  .hover-text {
+    position: absolute;
+    top: 40%;
+    left: calc(20% - 70px);
+    transform: translateY(-50%);
+    font-family:"Playwrite NG Modern";
+    font-size: 200%;
+    font-weight: 120%;
+    color: rgb(212, 222, 214);
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 37%;
+    height: 15%;
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .hover-text:hover {
+    transform: scale(1.1);
+  }
+</style>
+
+<div class="main-container">
+  <div class="image">
+    <img src="{{ url_for('static', filename='logo.jpg') }}" alt="JPG Image">
+  </div>
+  <div class="hover-text">Welcome To Our Sign-Language App<br> <br> Keep Experience The Next World</div>
+  <div class="container">
+    <h2>Login</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-danger">
+          <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/login" method="POST">
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+        {% if form.email.errors %}
+          <ul style="color: red;">
+            {% for error in form.email.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+        {% if form.password.errors %}
+          <ul style="color: red;">
+            {% for error in form.password.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Login</button>
+      <div style="text-align: center;">
+        <a href="/register" class="btn btn-secondary">Register</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

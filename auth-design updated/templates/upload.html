@@ -1,0 +1,124 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image for Hand Gesture Prediction</title>
+    <style>
+        body {
+            display: flex;
+            font-family:"Playwrite NG Modern";
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+       
+  .navbar {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #343a40; /* Dark navbar color */
+    color: #fff; /* White text color */
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft box shadow */
+    position: absolute;
+    top: 0;
+    z-index: 2;
+  }
+
+  .navbar a {
+    color: #fff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Space between buttons */
+  }
+
+  .navbar a:hover {
+    background-color: #15181a; /* Darker color on hover */
+  }
+
+  .main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure elements are stacked vertically */
+  }
+
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .center-text {
+    font-family:"Playwrite NG Modern";
+    font-size: 54px;
+    font-weight: bold;
+    color: #ffffff;
+    z-index: 2; /* Ensure the text is above the background */
+    margin-bottom: 20px; /* Space between text and button */
+  }
+
+  .center-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    display: inline-block;
+    border: none;
+    border-radius: 6px;
+    background-color: #343a40; /* Dark button color */
+    color: #ffffff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease;
+    z-index: 2; /* Ensure the button is above the background */
+  }
+
+  .center-button:hover {
+    background-color: #ffffff; /* Darker button color on hover */
+    text-decoration: none;
+    color: #343a40; /* Dark text color on hover */
+  }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <a href="/logout">Logout</a>
+      </div>
+      
+      <div class="main-container">
+        <div class="image">
+          <img src="{{ url_for('static', filename='grey.jpg') }}" alt="JPG Image">
+        </div>
+        
+      
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <h1 class = center-text>Upload Image for Hand Gesture Prediction</h1>
+        <input type="file" name="file" accept="image/*">
+        <button type="submit">Upload Image</button>
+    </form>
+</body>
+</html>

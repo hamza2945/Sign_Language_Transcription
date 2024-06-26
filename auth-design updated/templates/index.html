@@ -77,6 +77,7 @@
   .center-button {
     padding: 10px 20px;
     font-size: 16px;
+    display: inline-block;
     border: none;
     border-radius: 6px;
     background-color: #343a40; /* Dark button color */
@@ -87,7 +88,9 @@
   }
 
   .center-button:hover {
-    background-color: #373f3b; /* Darker button color on hover */
+    background-color: #ffffff; /* Darker button color on hover */
+    text-decoration: none;
+    color: #343a40; /* Dark text color on hover */
   }
 </style>
 
@@ -101,8 +104,13 @@
   <div class="image">
     <img src="{{ url_for('static', filename='dashboard.jpg') }}" alt="JPG Image">
   </div>
-  <div class="center-text">Welcome to the Dashboard!</div>
-  <a href="/some-action" class="center-button">LIVE TRANSCRIPTION</a> <!-- Update href as needed -->
+  
+
+  <div class="center-text">Real-Time Sign Language Transcription</div>
+  <div class="button-container">
+    <a href="{{ url_for('real_time') }}" class="center-button">Live Transcription</a>
+    <a href="{{ url_for('upload_image') }}" class="center-button">Upload Picture</a>
+</div>
 </div>
 
 {% endblock %}

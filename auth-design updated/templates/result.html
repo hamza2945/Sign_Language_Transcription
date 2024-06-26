@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        
+        img {
+            max-width: 90%;
+            border: 2px solid #000;
+            margin-bottom: 20px;
+        }
+        body {
+        font-family:"Playwrite NG Modern";
+        background-color: hsla(218, 23%, 34%, 0.334); /* Light gray background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+    }
+
+    .navbar {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #343a40; /* Dark navbar color */
+        color: #fff; /* White text color */
+        display: flex;
+        justify-content: flex-end; /* Align items to the right */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft box shadow */
+        position: absolute;
+        top: 0;
+        z-index: 2;
+    }
+
+    .navbar a {
+        color: #fff; /* White text color */
+        text-decoration: none; /* Remove underline */
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        margin-left: 10px; /* Space between buttons */
+    }
+
+    .navbar a:hover {
+        background-color: #15181a; /* Darker color on hover */
+    }
+
+    .main-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Ensure elements are stacked vertically */
+    }
+
+    .image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .center-text {
+        font-family:"Playwrite NG Modern";
+        font-size: 54px;
+        font-weight: bold;
+        color: #ffffff;
+        z-index: 2; /* Ensure the text is above the background */
+        margin-bottom: 20px; /* Space between text and button */
+    }
+
+    .center-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        display: inline-block;
+        border: none;
+        border-radius: 6px;
+        background-color: #343a40; /* Dark button color */
+        color: #ffffff; /* White text color */
+        text-decoration: none; /* Remove underline */
+        transition: background-color 0.3s ease;
+        z-index: 2; /* Ensure the button is above the background */
+    }
+
+    .center-button:hover {
+        background-color: #ffffff; /* Darker button color on hover */
+        text-decoration: none;
+        color: #343a40; /* Dark text color on hover */
+  }
+    .prediction {
+        font-family:"Playwrite NG Modern";
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffffff;
+        z-index: 2; /* Ensure the text is above the background */
+        margin-bottom: 20px; /* Space between text and button */
+    }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/upload">Upload</a>
+        <a href="/real-time">Real-Time</a>
+    </div>
+
+    <div class="main-container">
+        <div class="image">
+          <img src="{{ url_for('static', filename='grey.jpg') }}" alt="JPG Image">
+        </div>
+    <h1>Prediction Result</h1>
+    <img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Image">
+    <h2 class="prediction">Predicted Character: {{ prediction }}</h2>
+    <a class="center-button"href="/">Upload Another Image</a>
+</body>
+</html>

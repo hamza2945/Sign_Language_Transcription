@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time</title>
+</head>
+<body>
+    <h1>Real Time</h1>
+
+    <div class="video-container">
+        <video id="video" width="640" height="480" autoplay></video>
+      </div>
+    
+      <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              const video = document.getElementById('video');
+              video.src = '/real-time';
+              video.load();
+          });
+      </script>>
+</body>
+</html>
